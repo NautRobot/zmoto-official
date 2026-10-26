@@ -1027,7 +1027,7 @@ function performJailAction(action) {
         const pay = JAIL_JOB_PAY + skills.networking * 5 + skills.handiness * 3;
         jailCash += pay;
         const workChance = getJailGoodWorkChance();
-        if (Math.random() * 100 < workChance) {
+        if (Math.random()  < workChance) {
             jailInmateWork = Math.min(JAIL_GOOD_WORK_REQUIRED, jailInmateWork + 1);
             jailDisposition += 2;
             jailSuspicion = Math.max(0, jailSuspicion - 3 - skills.stealth);
@@ -1039,7 +1039,7 @@ function performJailAction(action) {
         }
     } else if (action === "guards") {
         const talkChance = getJailGuardTalkChance();
-        if (Math.random() * 100 < talkChance) {
+        if (Math.random()  < talkChance) {
             jailGuardTalks = Math.min(JAIL_GOOD_TALKS_REQUIRED, jailGuardTalks + 1);
             jailDisposition += 2;
             jailSuspicion = Math.max(0, jailSuspicion - 4);
@@ -1067,7 +1067,7 @@ function performJailAction(action) {
     } else if (action === "escape") {
         const escapeChance = getJailEscapeChance();
         jailDisposition -= 2;
-        if (Math.random() * 100 < escapeChance) {
+        if (Math.random()  < escapeChance) {
             recordJailHistory(`You escaped successfully with ${escapeChance}% odds.`);
             finishJailChallenge("breakout");
             return;
@@ -1682,7 +1682,7 @@ function refreshSleepCountdown() {
 }
 
 function resolveNightRobbery() {
-    if (garage.length === 0 || Math.random() * 100 >= getNightlyRobberyChance()) {
+    if (garage.length === 0 || Math.random()  >= getNightlyRobberyChance()) {
         return;
     }
 
@@ -1906,7 +1906,7 @@ function buySecurity() {
 
 function getRiskDetails(car) {
     const priceRisk = 12 + Math.log2(Math.max(1, car.recommendedPrice / 100)) * 16;
-    const chance = Math.floor(Math.max(8, priceRisk * Math.pow(3/4, skills.stealth))) * 100;//Math.max(1, Math.min(95, Math.round(priceRisk - skills.stealth * 8)));
+    const chance = Math.floor(Math.max(8, priceRisk * Math.pow(3/4, skills.stealth)));//Math.max(1, Math.min(95, Math.round(priceRisk - skills.stealth * 8)));
     const bandIndex = Math.min(9, Math.floor(chance / 10));
 
     return {
